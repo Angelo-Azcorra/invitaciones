@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Invitación al Bautizo y 1er Año de Eithan Daniel">
+    <meta name="theme-color" content="#1E3A5F">
+    <title>Bautizo y 1er Año | Eithan Daniel</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- YouTube Iframe API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <style>
+        /* ==========================================================================
+           1. VARIABLES & RESET (Premium Boss Baby)
+           ========================================================================== */
+        :root {
+            --c-navy: #1E3A5F;
+            --c-navy-light: #2C5282;
+            --c-navy-dark: #0f1d30;
+            --c-blue-pastel: #8EC5FC;
+            --c-gold: #D4AF37;
+            --c-gold-light: #F4E094;
+            --c-white: #FFFFFF;
+            --c-cream: #FCFAF8;
+            --c-text: #2D3748;
+            --c-text-light: #4A5568;
+            
+            --f-heading: 'Montserrat', sans-serif;
+            --f-elegant: 'Playfair Display', serif;
+            --f-body: 'Poppins', sans-serif;
+            
+            --shadow-sm: 0 4px 6px rgba(30, 58, 95, 0.05);
+            --shadow-md: 0 10px 30px rgba(30, 58, 95, 0.12);
+            --shadow-gold: 0 8px 25px rgba(212, 175, 55, 0.3);
+            
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-arch: 120px 120px 16px 16px; /* Para las tarjetas estilo arco */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--f-body);
+            background-color: var(--c-cream);
+            color: var(--c-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Evitar scroll cuando la portada está activa */
+        body.no-scroll {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* ==========================================================================
+           2. PANTALLA DE BIENVENIDA (EFECTO SOBRE/PORTADA)
+           ========================================================================== */
+        .welcome-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, var(--c-navy), var(--c-navy-dark));
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
+            text-align: center;
+            padding: 2rem;
+            color: var(--c-white);
+        }
+
+        .welcome-screen.open {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .welcome-content {
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .seal-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--c-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -65px auto 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 2px solid var(--c-white);
+            color: var(--c-navy);
+            font-family: var(--f-elegant);
+            font-size: 2rem;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .welcome-content h2 {
+            font-family: var(--f-elegant);
+            font-size: 2.2rem;
+            color: var(--c-gold);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+
+        .welcome-content p {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+            color: var(--c-blue-pastel);
+        }
+
+        .btn-open {
+            background: var(--c-white);
+            color: var(--c-navy);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-family: var(--f-heading);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: pulse-gold 2s infinite;
+        }
+        
+        .btn-open:active { transform: scale(0.95); }
+
+        @keyframes pulse-gold {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+
+        /* ==========================================================================
+           3. CONTROLES DE MÚSICA
+           ========================================================================== */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            color: var(--c-gold);
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+        .music-control.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .music-control svg { width: 20px; height: 20px; fill: currentColor; }
+        .music-control.playing { animation: spin-slow 4s linear infinite; }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+
+        /* Contenedor invisible para YouTube */
+        #youtube-container {
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            left: -9999px;
+            visibility: hidden;
+        }
+
+        /* ==========================================================================
+           4. TYPOGRAPHY & UTILITIES
+           ========================================================================== */
+        h1, h2, h3 { font-family: var(--f-heading); line-height: 1.2; }
+        .font-elegant { font-family: var(--f-elegant); font-weight: 400; font-style: italic; }
+        
+        .text-gold { color: var(--c-gold); }
+        .text-navy { color: var(--c-navy); }
+        .text-center { text-align: center; }
+        
+        .section-padding { padding: 5rem 1.5rem; }
+        .container { max-width: 600px; margin: 0 auto; }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 2rem;
+            border-radius: 50px;
+            font-family: var(--f-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary { background: var(--c-navy); color: var(--c-white); box-shadow: var(--shadow-md); }
+        .btn-gold { background: var(--c-gold); color: var(--c-white); box-shadow: var(--shadow-gold); }
+
+        .divider {
+            width: 1px;
+            height: 60px;
+            background: var(--c-gold);
+            margin: 2rem auto;
+        }
+
+        /* ==========================================================================
+           5. SECTIONS
+           ========================================================================== */
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png'), linear-gradient(180deg, var(--c-cream) 0%, #FFFFFF 100%);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .boss-baby-icon {
+            width: 80px;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h2 {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--c-navy-light);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--c-navy);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero h3 {
+            font-size: 1.5rem;
+            color: var(--c-gold);
+            margin-bottom: 2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Baby Photo Profile */
+        .baby-photo-container {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(135deg, var(--c-gold), var(--c-gold-light));
+            box-shadow: var(--shadow-md);
+        }
+        .baby-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--c-white);
+        }
+
+        /* Family Section */
+        .welcome-text {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--c-text);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .family-card {
+            background: var(--c-white);
+            border-radius: var(--radius-lg);
+            padding: 3rem 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .family-group { margin-bottom: 2.5rem; }
+        .family-group h3 { 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            color: var(--c-gold); 
+            margin-bottom: 1rem; 
+        }
+        .family-group p { 
+            font-family: var(--f-elegant); 
+            font-size: 1.4rem; 
+            color: var(--c-navy); 
+            margin-bottom: 0.3rem; 
+        }
+
+        /* Countdown */
+        .countdown-section { background: var(--c-navy); color: var(--c-white); }
+        .countdown-wrapper { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
+        .time-box { text-align: center; }
+        .time-box span { 
+            font-family: var(--f-elegant); 
+            font-size: 2.5rem; 
+            color: var(--c-gold); 
+            display: block; 
+            line-height: 1; 
+        }
+        .time-box label { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            opacity: 0.8; 
+            margin-top: 0.5rem; 
+            display: block;
+        }
+
+        /* Event Details (ARCH CARDS) */
+        .events-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .arch-card {
+            background: var(--c-white);
+            border-radius: var(--radius-arch);
+            padding: 4rem 2rem 3rem;
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            border: 1px solid rgba(30, 58, 95, 0.05);
+            border-top: 8px solid var(--c-navy);
+        }
+
+        .arch-card.gold-top { border-top: 8px solid var(--c-gold); }
+
+        .arch-icon {
+            width: 60px; height: 60px;
+            background: var(--c-cream);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--c-gold);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .arch-icon svg { width: 30px; height: 30px; fill: currentColor; }
+        
+        .arch-card h3 { font-family: var(--f-elegant); font-size: 2rem; color: var(--c-navy); margin-bottom: 0.5rem; }
+        .arch-card .time { font-family: var(--f-heading); font-weight: 700; color: var(--c-gold); font-size: 1.2rem; margin-bottom: 1.5rem; }
+        .arch-card p { color: var(--c-text-light); margin-bottom: 1.5rem; font-size: 1rem; }
+        
+        .special-note {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: #A68A2A;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            border: 1px dashed var(--c-gold);
+        }
+
+        /* Timeline */
+        .timeline { position: relative; max-width: 400px; margin: 3rem auto 0; padding: 1rem 0; }
+        .timeline::before {
+            content: ''; position: absolute; top: 0; left: 24px; height: 100%; width: 1px;
+            background: dashed 1px var(--c-gold);
+        }
+        .timeline-item { position: relative; padding-left: 60px; margin-bottom: 2.5rem; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-icon {
+            position: absolute; left: 0; top: 0; width: 50px; height: 50px;
+            background: var(--c-navy); color: var(--c-white);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; z-index: 2; box-shadow: 0 0 0 6px var(--c-cream);
+        }
+        .timeline-content h4 { color: var(--c-navy); font-size: 1.1rem; margin-bottom: 0.2rem; }
+        .timeline-content p { font-size: 0.95rem; color: var(--c-text-light); }
+
+        /* RSVP */
+        .rsvp-section {
+            background: var(--c-white);
+            text-align: center;
+            padding-bottom: 8rem;
+            position: relative;
+        }
+        .rsvp-section::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+            background: linear-gradient(90deg, var(--c-navy), var(--c-gold), var(--c-navy));
+        }
+
+        .signature {
+            margin-top: 3rem;
+            font-family: 'Great Vibes', var(--f-elegant);
+            font-size: 2.5rem;
+            color: var(--c-navy);
+        }
+
+        /* Floating WhatsApp */
+        .fab {
+            position: fixed; bottom: 2rem; right: 1.5rem;
+            width: 60px; height: 60px; background: #25D366; color: white;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .fab:active { transform: scale(0.9); }
+        .fab svg { width: 32px; height: 32px; fill: currentColor; }
+
+    </style>
+</head>
+<body class="no-scroll">
+
+    <!-- REPRODUCTOR DE YOUTUBE OCULTO -->
+    <!-- Contenedor invisible para cargar la música desde YouTube -->
+    <div id="youtube-container">
+        <div id="youtube-player"></div>
+    </div>
+
+    <!-- BOTÓN DE MÚSICA FLOTANTE -->
+    <div id="music-toggle" class="music-control">
+        <svg viewBox="0 0 24 24"><path d="M12,3V12.26C11.5,12.09 11,12 10.5,12C8,12 6,14 6,16.5C6,19 8,21 10.5,21C13,21 15,19 15,16.5V6H19V3H12Z"/></svg>
+    </div>
+
+    <!-- PANTALLA DE BIENVENIDA (EL SOBRE) -->
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-content">
+            <div class="seal-icon">E</div>
+            <h2>Eithan Daniel</h2>
+            <p>Bautizo y 1er Año</p>
+            <button id="btn-open-invite" class="btn-open">Abrir Invitación</button>
+        </div>
+    </div>
+
+    <!-- 1. HERO PRINCIPAL -->
+    <header class="hero" id="home">
+        <div class="container reveal">
+            <!-- Icono decorativo -->
+            <img src="https://cdn-icons-png.flaticon.com/512/3283/3283112.png" alt="Jefe en Pañales" class="boss-baby-icon">
+            
+            <h2>Acompáñanos a celebrar el</h2>
+            <h1 class="font-elegant">Bautizo</h1>
+            <p style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem;">de nuestro hijo</p>
+            <h3>Eithan Daniel</h3>
+            
+            <!-- FOTO DEL BEBÉ -->
+            <div class="baby-photo-container">
+                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Eithan Daniel" class="baby-photo">
+            </div>
+
+            <p style="font-size: 0.85rem; color: var(--c-text-light); text-transform: uppercase; letter-spacing: 2px; margin-top: 1rem;">
+                27 de Junio, 2026
+            </p>
+            
+            <div class="divider"></div>
+        </div>
+    </header>
+
+    <!-- 2. MENSAJE Y FAMILIA -->
+    <section class="section-padding" id="familia">
+        <div class="container reveal">
+            <p class="welcome-text font-elegant">
+                "Doy gracias a Dios por haberme dado la vida.<br>
+                A mis padres por haberme esperado con tanto amor."
+            </p>
+            
+            <div class="family-card">
+                <div class="family-group">
+                    <h3>Mis Padres</h3>
+                    <p>Johana Gisela Azcorra Moguel</p>
+                    <p>Alan de Jesus Aviles Rosado</p>
+                </div>
+                
+                <div class="divider" style="height: 1px; width: 100px; background: rgba(212, 175, 55, 0.3);"></div>
+                
+                <div class="family-group" style="margin-top: 2.5rem; margin-bottom: 0;">
+                    <h3>Mis Padrinos</h3>
+                    <p>Jorge Luis Chan González</p>
+                    <p>Lucy Yadira Vera Rosado</p>
+                    
+                    <p style="font-size: 0.95rem; font-family: var(--f-body); color: var(--c-text-light); font-style: italic; margin-top: 1.5rem; line-height: 1.6;">
+                        "A mis padrinos porque me guiarán por el camino de la fe. Y a ustedes por acompañarme en este día tan importante."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. CONTADOR REGRESIVO -->
+    <section class="section-padding countdown-section text-center">
+        <div class="container reveal">
+            <h2 class="font-elegant" style="font-size: 2.5rem; color: var(--c-white); margin-bottom: 0.5rem;">Faltan</h2>
+            <p style="color: var(--c-blue-pastel); letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase;">Para el gran día</p>
+            
+            <div class="countdown-wrapper" id="countdown">
+                <div class="time-box">
+                    <span id="days">00</span>
+                    <label>Días</label>
+                </div>
+                <div class="time-box">
+                    <span id="hours">00</span>
+                    <label>Horas</label>
+                </div>
+                <div class="time-box">
+                    <span id="minutes">00</span>
+                    <label>Min</label>
+                </div>
+                <div class="time-box">
+                    <span id="seconds">00</span>
+                    <label>Seg</label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. INFORMACIÓN DEL EVENTO & UBICACIÓN -->
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="text-navy text-center font-elegant reveal" style="font-size: 2.5rem;">Dónde & Cuándo</h2>
+            <div class="divider"></div>
+            
+            <div class="events-grid">
+                <!-- Tarjeta de Ceremonia (Estilo Arco) -->
+                <div class="arch-card reveal">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12,3L1,9L5,11.18V21H19V11.18L23,9L12,3M12,5.7L18.46,9.15L12,12.6L5.54,9.15L12,5.7M11,14H13V16H15V18H13V20H11V18H9V16H11V14Z"/></svg>
+                    </div>
+                    <h3>Ceremonia Religiosa</h3>
+                    <div class="time">9:00 AM</div>
+                    <p>
+                        <strong>Parroquia Guadalupe Tepeyac</strong><br>
+                        Col. Vista Hermosa
+                    </p>
+                    
+                    <a href="https://maps.google.com/?q=Parroquia+Guadalupe+Tepeyac+Vista+Hermosa" target="_blank" class="btn btn-primary" style="width:100%; margin-top: 1rem;">
+                        Ver Ubicación
+                    </a>
+                </div>
+
+                <!-- Tarjeta de Recepción (Estilo Arco Dorado) -->
+                <div class="arch-card gold-top reveal">
+                    <div class="arch-icon">
+                        <svg viewBox="0 0 24 24"><path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z"/></svg>
+                    </div>
+                    <h3>Recepción</h3>
+                    <div class="time">1:00 PM</div>
+                    
+                    <div class="special-note">
+                        🏊‍♂️ ¡Llevar traje de baño!
+                    </div>
+
+                    <p>
+                        <strong>Salón Solaris</strong><br>
+                        C. Morelos #22 entre 108 y Miguel Hidalgo, Col. Bellavista
+                    </p>
+                    
+                    <a href="https://maps.app.goo.gl/wN5rRieqzWV9k1py9" target="_blank" class="btn btn-gold" style="width:100%; margin-top: 1rem;">
+                        Ver Ubicación
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CRONOGRAMA DEL EVENTO -->
+    <section class="section-padding" style="background: var(--c-white);">
+        <div class="container reveal">
+            <h2 class="text-navy text-center font-elegant" style="font-size: 2.5rem;">Itinerario</h2>
+            <p class="text-center" style="color: var(--c-gold); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem;">Horarios del evento</p>
+            
+            <div class="timeline">
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon">⛪</div>
+                    <div class="timeline-content">
+                        <h4>9:00 AM</h4>
+                        <p>Ceremonia Religiosa</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon" style="background: var(--c-gold);">📸</div>
+                    <div class="timeline-content">
+                        <h4>10:30 AM</h4>
+                        <p>Sesión de Fotos Familiares</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon">🥂</div>
+                    <div class="timeline-content">
+                        <h4>1:00 PM</h4>
+                        <p>Recepción en Salón Solaris</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon" style="background: var(--c-gold);">🎂</div>
+                    <div class="timeline-content">
+                        <h4>3:00 PM</h4>
+                        <p>Pastel y Celebración de mi 1er Añito</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal">
+                    <div class="timeline-icon">🏊‍♂️</div>
+                    <div class="timeline-content">
+                        <h4>4:00 PM</h4>
+                        <p>¡A nadar! (Convivencia en piscina)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. CONFIRMACIÓN Y MENSAJE FINAL -->
+    <section class="section-padding rsvp-section" id="asistencia">
+        <div class="container reveal">
+            <h2 class="font-elegant text-navy" style="font-size: 2.5rem; margin-bottom: 1rem;">Confirmación</h2>
+            <p style="color: var(--c-text-light); margin-bottom: 3rem;">
+                Por favor, confírmanos tu asistencia para contemplarte en este día tan especial.
+            </p>
+            
+            <a href="#" id="btn-confirmar" target="_blank" class="btn btn-primary" style="margin-bottom: 4rem; padding: 0 3rem; min-height: 54px;">
+                Confirmar Asistencia
+            </a>
+
+            <div class="divider"></div>
+
+            <div style="margin-top: 3rem;">
+                <p class="font-elegant" style="font-size: 1.3rem; color: var(--c-navy); line-height: 1.8;">
+                    "Hoy recibo una bendición especial y me encantaría compartir este momento contigo."
+                </p>
+                <div class="signature">
+                    Eithan Daniel
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. BOTÓN FLOTANTE DE WHATSAPP -->
+    <a href="#" id="fab-whatsapp" class="fab" target="_blank" aria-label="Confirmar asistencia por WhatsApp">
+        <svg viewBox="0 0 24 24">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.5 14.27C13.33 14.44 13.17 14.46 12.92 14.33C12.67 14.21 11.85 13.93 10.88 13.06C10.12 12.38 9.61 11.53 9.46 11.27C9.3 11 9.44 10.86 9.57 10.74C9.67 10.63 9.81 10.45 9.93 10.31C10.05 10.16 10.09 10.06 10.17 9.89C10.25 9.72 10.2 9.58 10.15 9.46C10.09 9.33 9.61 8.13 9.41 7.64C9.21 7.16 9.03 7.23 8.87 7.23C8.73 7.23 8.57 7.23 8.53 7.33Z"/>
+        </svg>
+    </a>
+
+    <!-- SCRIPTS -->
+    <script>
+        const configData = {
+            fechaEventoCountdown: "2026-06-27T09:00:00", 
+            telefonoWhatsApp: "529811358868",
+            mensajeWhatsApp: "¡Hola! Confirmo mi asistencia al Bautizo y 1er Año de Eithan Daniel. 👶👔"
+        };
+
+        // Variables para el reproductor de YouTube
+        var ytPlayer;
+        var isPlaying = false;
+        
+        // Esta función es llamada automáticamente por la API de YouTube cuando está lista
+        function onYouTubeIframeAPIReady() {
+            ytPlayer = new YT.Player('youtube-player', {
+                height: '10', // Lo más pequeño posible
+                width: '10',
+                videoId: 't3217H8JppI', // River Flows in You - Piano Clásico Hermoso
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'loop': 1,
+                    'playlist': 't3217H8JppI' // Requerido para que el loop funcione
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        // Se ejecuta cuando el reproductor oculto está listo
+        function onPlayerReady(event) {
+            console.log("Reproductor de música listo.");
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            configurarWhatsApp();
+            iniciarContador(configData.fechaEventoCountdown);
+            iniciarAnimacionesScroll();
+            configurarInteraccionesIniciales();
+        });
+
+        /**
+         * Lógica del Sobre y la Música con YouTube
+         */
+        function configurarInteraccionesIniciales() {
+            const btnOpen = document.getElementById('btn-open-invite');
+            const welcomeScreen = document.getElementById('welcome-screen');
+            const body = document.body;
+            const musicToggle = document.getElementById('music-toggle');
+
+            // Al hacer clic en "Abrir Invitación"
+            btnOpen.addEventListener('click', () => {
+                welcomeScreen.classList.add('open');
+                body.classList.remove('no-scroll');
+                musicToggle.classList.add('visible');
+                
+                // Reproducir el video de YouTube oculto
+                if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                    ytPlayer.setVolume(70);
+                    ytPlayer.playVideo();
+                    isPlaying = true;
+                    musicToggle.classList.add('playing');
+                }
+            });
+
+            // Control manual de Play/Pause de la música
+            musicToggle.addEventListener('click', () => {
+                if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                    if (isPlaying) {
+                        ytPlayer.pauseVideo();
+                        musicToggle.classList.remove('playing');
+                    } else {
+                        ytPlayer.playVideo();
+                        musicToggle.classList.add('playing');
+                    }
+                    isPlaying = !isPlaying;
+                }
+            });
+        }
+
+        /**
+         * Lógica del WhatsApp Link
+         */
+        function configurarWhatsApp() {
+            const num = configData.telefonoWhatsApp;
+            const msj = encodeURIComponent(configData.mensajeWhatsApp);
+            const link = `https://wa.me/${num}?text=${msj}`;
+            
+            document.getElementById('btn-confirmar').href = link;
+            document.getElementById('fab-whatsapp').href = link;
+        }
+
+        /**
+         * Lógica del Contador Regresivo
+         */
+        function iniciarContador(fechaDestinoStr) {
+            const targetDate = new Date(fechaDestinoStr).getTime();
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minsEl = document.getElementById('minutes');
+            const secsEl = document.getElementById('seconds');
+
+            const timerInterval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    clearInterval(timerInterval);
+                    daysEl.innerText = "00"; hoursEl.innerText = "00";
+                    minsEl.innerText = "00"; secsEl.innerText = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.innerText = days < 10 ? "0" + days : days;
+                hoursEl.innerText = hours < 10 ? "0" + hours : hours;
+                minsEl.innerText = minutes < 10 ? "0" + minutes : minutes;
+                secsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+                
+            }, 1000);
+        }
+
+        /**
+         * Lógica de Intersection Observer (Reveal Effect)
+         */
+        function iniciarAnimacionesScroll() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target);
+                });
+            }, revealOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        }
+    </script>
+</body>
+</html>
