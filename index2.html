@@ -190,14 +190,16 @@
         .music-control.playing { animation: spin-slow 4s linear infinite; }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
 
-        /* Contenedor invisible para YouTube */
+        /* Contenedor invisible para YouTube optimizado para móviles */
         #youtube-container {
             position: absolute;
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            left: -9999px;
-            visibility: hidden;
+            top: -1000px;
+            left: -1000px;
+            width: 10px;
+            height: 10px;
+            opacity: 0.01;
+            pointer-events: none;
+            z-index: -1;
         }
 
         /* ==========================================================================
@@ -717,6 +719,7 @@
                     'controls': 0,
                     'disablekb': 1,
                     'loop': 1,
+                    'playsinline': 1,
                     'playlist': 't3217H8JppI' // Requerido para que el loop funcione
                 },
                 events: {
