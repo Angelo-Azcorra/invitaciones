@@ -7,6 +7,13 @@
     <meta name="theme-color" content="#111827">
     <title>Bautizo y 1er Año | Eithan Daniel</title>
     
+    <!-- ETIQUETAS OPEN GRAPH PARA VISTA PREVIA EN WHATSAPP / FACEBOOK -->
+    <meta property="og:title" content="👶💼 Bautizo de Eithan Daniel">
+    <meta property="og:description" content="Te invito a celebrar mi Bautizo y 1er Añito. Toca aquí para abrir la invitación oficial y confirmar tu asistencia.">
+    <meta property="og:image" content="https://i0.wp.com/cinemedios.com/wp-content/uploads/2021/07/jefeenpanales2.jpg">
+    <meta property="og:url" content="https://bit.ly/4uKebLT">
+    <meta property="og:type" content="website">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,30 +24,26 @@
 
     <style>
         /* ==========================================================================
-           1. VARIABLES & RESET (Paleta "Jefe en Pañales" - Traje & Corbata Celeste)
+           1. VARIABLES & RESET (Paleta "Jefe en Pañales")
            ========================================================================== */
         :root {
-            /* Colores Base */
-            --c-navy: #111827;         /* Traje oscuro casi negro */
+            --c-navy: #111827;         
             --c-navy-light: #1F2937;
-            --c-accent: #38B6FF;       /* Celeste icónico Jefe en Pañales */
-            --c-accent-dark: #0284C7;  /* Azul más fuerte para hover */
+            --c-accent: #38B6FF;       
+            --c-accent-dark: #0284C7;  
             --c-white: #FFFFFF;
-            --c-cream: #F8F5F0;        /* Papel crema elegante */
+            --c-cream: #F8F5F0;        
             --c-text: #374151;
             --c-text-light: #6B7280;
             
-            /* Tipografías */
             --f-heading: 'Montserrat', sans-serif;
             --f-elegant: 'Playfair Display', serif;
             --f-body: 'Poppins', sans-serif;
             
-            /* Sombras ajustadas a la nueva paleta */
             --shadow-sm: 0 4px 6px rgba(17, 24, 39, 0.08);
             --shadow-md: 0 10px 30px rgba(17, 24, 39, 0.15);
             --shadow-accent: 0 8px 25px rgba(56, 182, 255, 0.35);
             
-            /* Radios */
             --radius-md: 16px;
             --radius-lg: 24px;
             --radius-arch: 120px 120px 16px 16px;
@@ -53,9 +56,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: var(--f-body);
@@ -65,167 +66,65 @@
             overflow-x: hidden;
         }
         
-        body.no-scroll {
-            overflow: hidden;
-            height: 100vh;
-        }
+        body.no-scroll { overflow: hidden; height: 100vh; }
 
         /* ==========================================================================
-           2. PANTALLA DE BIENVENIDA (SOBRE 3D REALISTA CON IMAGEN INTERIOR)
+           2. PANTALLA DE BIENVENIDA
            ========================================================================== */
         .welcome-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--c-cream) url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
         }
 
-        .welcome-screen.open {
-            transform: translateY(-100%);
-            opacity: 0;
-            pointer-events: none;
-        }
+        .welcome-screen.open { transform: translateY(-100%); opacity: 0; pointer-events: none; }
 
         .welcome-title {
-            font-family: var(--f-elegant);
-            font-size: 3rem;
-            color: var(--c-navy);
-            letter-spacing: 4px;
-            margin-bottom: 3rem;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
-            text-align: center;
+            font-family: var(--f-elegant); font-size: 3rem; color: var(--c-navy);
+            letter-spacing: 4px; margin-bottom: 3rem; text-shadow: 2px 2px 5px rgba(0,0,0,0.05); text-align: center;
         }
 
         .envelope-wrapper {
-            position: relative;
-            width: 90vw;
-            max-width: 340px;
-            height: 220px;
-            cursor: pointer;
-            perspective: 1000px;
-            margin-bottom: 2rem;
+            position: relative; width: 90vw; max-width: 340px; height: 220px;
+            cursor: pointer; perspective: 1000px; margin-bottom: 2rem;
             animation: pulse-envelope 2.5s infinite ease-in-out;
         }
 
-        @keyframes pulse-envelope {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
+        @keyframes pulse-envelope { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-        .env-back {
-            position: absolute; inset: 0; 
-            background: #D1D5DB; /* Gris plata oscuro interior */
-            border-radius: 4px; 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            z-index: 1;
-        }
+        .env-back { position: absolute; inset: 0; background: #D1D5DB; border-radius: 4px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); z-index: 1; }
 
-        /* TARJETA INTERIOR CON IMAGEN SOLICITADA */
         .env-card {
-            position: absolute; inset: 15px 15px 25px 15px; 
-            background: #FFFFFF; 
-            border-radius: 6px;
+            position: absolute; inset: 15px 15px 25px 15px; background: #FFFFFF; border-radius: 6px;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s; /* Efecto rebote suave */
-            padding: 0;
-            overflow: hidden;
-            z-index: 2; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2); transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s;
+            padding: 0; overflow: hidden; z-index: 2; 
         }
-        .env-card-img {
-            width: 100%;
-            height: 65%;
-            object-fit: cover;
-            border-bottom: 4px solid var(--c-accent);
-        }
-        .env-card-text {
-            height: 35%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: var(--c-white);
-        }
-        .env-card-text span { 
-            font-family: var(--f-elegant); 
-            font-size: 1.25rem; 
-            color: var(--c-navy); 
-            margin-bottom: 2px; 
-            text-align: center; 
-            font-weight: 600;
-        }
-        .env-card-text p { 
-            font-family: var(--f-heading); 
-            font-size: 0.7rem; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            color: var(--c-accent); 
-            font-weight: 700;
-        }
+        .env-card-img { width: 100%; height: 65%; object-fit: cover; border-bottom: 4px solid var(--c-accent); }
+        .env-card-text { height: 35%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--c-white); }
+        .env-card-text span { font-family: var(--f-elegant); font-size: 1.25rem; color: var(--c-navy); margin-bottom: 2px; text-align: center; font-weight: 600; }
+        .env-card-text p { font-family: var(--f-heading); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; color: var(--c-accent); font-weight: 700; }
 
-        /* Capas del sobre */
         .env-left { position: absolute; inset: 0; background: #E5E7EB; clip-path: polygon(0 0, 50% 50%, 0 100%); border-radius: 4px; z-index: 3; }
         .env-right { position: absolute; inset: 0; background: #E5E7EB; clip-path: polygon(100% 0, 50% 50%, 100% 100%); border-radius: 4px; z-index: 3; }
         .env-bottom { position: absolute; inset: 0; background: #F3F4F6; clip-path: polygon(0 100%, 50% 45%, 100% 100%); border-radius: 4px; z-index: 3; filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.05)); }
 
-        .env-top-wrapper {
-            position: absolute; inset: -1px;
-            transform-origin: top;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
-            transform-style: preserve-3d;
-        }
-        .env-top-bg {
-            position: absolute; inset: 0;
-            background: #F9FAFB; /* Blanco hueso */
-            clip-path: polygon(0 0, 100% 0, 50% 55%);
-            border-radius: 4px 4px 0 0;
-            backface-visibility: hidden;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-        }
+        .env-top-wrapper { position: absolute; inset: -1px; transform-origin: top; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4; transform-style: preserve-3d; }
+        .env-top-bg { position: absolute; inset: 0; background: #F9FAFB; clip-path: polygon(0 0, 100% 0, 50% 55%); border-radius: 4px 4px 0 0; backface-visibility: hidden; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); }
 
-        /* SELLO DE CERA - Ajustado a paleta Jefe en Pañales */
         .wax-seal {
-            position: absolute;
-            top: 55%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 65px; height: 65px;
-            background: var(--c-navy);
-            border-radius: 50%;
+            position: absolute; top: 55%; left: 50%; transform: translate(-50%, -50%);
+            width: 65px; height: 65px; background: var(--c-navy); border-radius: 50%;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 2px 5px rgba(255,255,255,0.2);
-            display: flex; align-items: center; justify-content: center;
-            border: 2px solid rgba(255,255,255,0.8);
-            backface-visibility: hidden;
+            display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.8); backface-visibility: hidden;
         }
 
-        .envelope-hint {
-            margin-top: 3rem;
-            font-family: var(--f-heading);
-            font-size: 0.9rem;
-            color: var(--c-navy);
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-weight: 600;
-            animation: pulse-hint 1.5s infinite alternate;
-            text-align: center;
-            transition: opacity 0.3s;
-        }
-
-        @keyframes pulse-hint {
-            0% { opacity: 0.5; transform: translateY(0); }
-            100% { opacity: 1; transform: translateY(-5px); }
-        }
+        .envelope-hint { margin-top: 3rem; font-family: var(--f-heading); font-size: 0.9rem; color: var(--c-navy); letter-spacing: 3px; text-transform: uppercase; font-weight: 600; animation: pulse-hint 1.5s infinite alternate; text-align: center; transition: opacity 0.3s; }
+        @keyframes pulse-hint { 0% { opacity: 0.5; transform: translateY(0); } 100% { opacity: 1; transform: translateY(-5px); } }
 
         .envelope-wrapper.is-opening { animation: none; pointer-events: none; }
         .envelope-wrapper.is-opening .env-top-wrapper { transform: rotateX(180deg); }
-        /* Ahora la tarjeta sube bastante para que se vea toda la imagen */
         .envelope-wrapper.is-opening .env-card { transform: translateY(-130px); }
         .envelope-wrapper.is-opening ~ .envelope-hint { opacity: 0; }
 
@@ -233,137 +132,58 @@
            3. CONTROLES DE MÚSICA
            ========================================================================== */
         .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid var(--c-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            cursor: pointer;
-            box-shadow: var(--shadow-sm);
-            color: var(--c-accent-dark);
-            transition: all 0.3s ease;
-            opacity: 0;
-            pointer-events: none;
+            position: fixed; top: 20px; right: 20px; width: 45px; height: 45px;
+            background: rgba(255, 255, 255, 0.95); border: 2px solid var(--c-accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; z-index: 1000; cursor: pointer;
+            box-shadow: var(--shadow-sm); color: var(--c-accent-dark); transition: all 0.3s ease; opacity: 0; pointer-events: none;
         }
-        .music-control.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .music-control.visible { opacity: 1; pointer-events: auto; }
         .music-control svg { width: 20px; height: 20px; fill: currentColor; }
         .music-control.playing { animation: spin-slow 4s linear infinite; }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
-
-        #youtube-container {
-            position: absolute; top: -1000px; left: -1000px; width: 10px; height: 10px;
-            opacity: 0.01; pointer-events: none; z-index: -1;
-        }
+        #youtube-container { position: absolute; top: -1000px; left: -1000px; width: 10px; height: 10px; opacity: 0.01; pointer-events: none; z-index: -1; }
 
         /* ==========================================================================
            4. TYPOGRAPHY, UTILITIES & IMAGES
            ========================================================================== */
         h1, h2, h3 { font-family: var(--f-heading); line-height: 1.2; }
         .font-elegant { font-family: var(--f-elegant); font-weight: 400; font-style: italic; }
-        
         .text-accent { color: var(--c-accent); }
         .text-navy { color: var(--c-navy); }
         .text-center { text-align: center; }
-        
         .section-padding { padding: 5rem 1.5rem; }
         .container { max-width: 600px; margin: 0 auto; }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.9s cubic-bezier(0.5, 0, 0, 1);
-        }
+        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.9s cubic-bezier(0.5, 0, 0, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 48px;
-            padding: 0 2rem;
-            border-radius: 50px;
-            font-family: var(--f-heading);
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            letter-spacing: 1px;
+            display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 2rem;
+            border-radius: 50px; font-family: var(--f-heading); font-weight: 600; font-size: 0.95rem; text-decoration: none;
+            transition: all 0.3s ease; border: none; cursor: pointer; letter-spacing: 1px;
         }
         .btn-primary { background: var(--c-navy); color: var(--c-white); box-shadow: var(--shadow-md); }
         .btn-accent { background: var(--c-accent); color: var(--c-white); box-shadow: var(--shadow-accent); }
-
         .divider { width: 1px; height: 60px; background: var(--c-accent); margin: 2rem auto; }
 
-        /* Banners Decorativos de Jefe en Pañales */
-        .image-divider {
-            width: 100%;
-            height: 35vh;
-            min-height: 250px;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        .image-divider-1 {
-            background-image: url('https://i0.wp.com/cinemedios.com/wp-content/uploads/2021/07/jefeenpanales2.jpg?fit=1200%2C675&ssl=1');
-        }
-        .image-divider-1::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, var(--c-cream) 0%, transparent 20%, transparent 80%, var(--c-navy) 100%);
-        }
-
-        .image-divider-2 {
-            background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlAFlrT-IoNYm9l6fiyC2S3Y7WStBOzzzW8RK8VcRVxf36Wd8d4FnynKlAxyUTAMc0TrCSrCxWVAW5Hq7UKoKM0r-tivk-Y-sSpvXTeP6GnQf8Qc9_zz30akaDab4tK1asKR4WB5ihM7rg/s1600/the-boss-baby-3840x2160-animation-4k-5686.jpg');
-        }
-        .image-divider-2::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, var(--c-white) 0%, transparent 20%, transparent 80%, var(--c-white) 100%);
-        }
+        /* Banners Decorativos */
+        .image-divider { width: 100%; height: 35vh; min-height: 250px; background-size: cover; background-position: center; background-repeat: no-repeat; position: relative; }
+        .image-divider-1 { background-image: url('https://i0.wp.com/cinemedios.com/wp-content/uploads/2021/07/jefeenpanales2.jpg?fit=1200%2C675&ssl=1'); }
+        .image-divider-1::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--c-cream) 0%, transparent 20%, transparent 80%, var(--c-navy) 100%); }
+        .image-divider-2 { background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlAFlrT-IoNYm9l6fiyC2S3Y7WStBOzzzW8RK8VcRVxf36Wd8d4FnynKlAxyUTAMc0TrCSrCxWVAW5Hq7UKoKM0r-tivk-Y-sSpvXTeP6GnQf8Qc9_zz30akaDab4tK1asKR4WB5ihM7rg/s1600/the-boss-baby-3840x2160-animation-4k-5686.jpg'); }
+        .image-divider-2::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, var(--c-white) 0%, transparent 20%, transparent 80%, var(--c-white) 100%); }
 
         /* ==========================================================================
            5. SECTIONS
            ========================================================================== */
         .hero {
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* Nuevo fondo para la primera sección usando la imagen del Jefe en Pañales */
+            position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;
             background: linear-gradient(180deg, rgba(248, 245, 240, 0.45) 0%, rgba(255, 255, 255, 0.95) 100%), url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh5OznkAY6rNMM3KfwMSnxWAWMCSifr6BdxXxg05ok72k1BDQzNzfdj1dgUeKXqabz7P7LqJgRPPkABrUb4HBqVVDNYBtxUneo0s4qSUIgefUq8kDYumtHfTa74N2K084v49tkwYRVrK42I/s1600/the_boss_baby_2017-wide.jpg');
-            background-size: cover;
-            background-position: center top;
-            padding: 2rem;
-            text-align: center;
+            background-size: cover; background-position: center top; padding: 2rem; text-align: center;
         }
         
-        .boss-baby-icon {
-            width: 80px;
-            margin-bottom: 1.5rem;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-            animation: float 4s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+        .boss-baby-icon { width: 80px; margin-bottom: 1.5rem; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); animation: float 4s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
         .hero h2 { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--c-navy-light); margin-bottom: 1rem; }
         .hero h1 { font-size: 3.5rem; color: var(--c-navy); margin-bottom: 0.5rem; }
@@ -375,46 +195,21 @@
         }
         .baby-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--c-white); }
 
-        /* Estilos para el fondo de la Sección 2 (Familia) con el bebé gateando */
-        #familia {
-            position: relative;
-            background-color: var(--c-white);
-            overflow: hidden; /* Mantiene la imagen contenida en su sección */
-        }
-
+        #familia { position: relative; background-color: var(--c-white); overflow: hidden; }
         #familia::before {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 100%;
-            /* Imagen PNG del bebé gateando (Puedes reemplazar la URL por la tuya si la subes a un host) */
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 100%;
             background-image: url('https://freepngimg.com/thumb/boss_baby/84687-baby-boss-desktop-infant-film-hq-image-free-png.png');
-            background-size: 80%;
-            background-position: center bottom -10px;
-            background-repeat: no-repeat;
-            opacity: 0.12; /* Transparencia solicitada */
-            z-index: 0;
-            pointer-events: none;
-            /* Efecto fade avanzado con máscara CSS */
+            background-size: 80%; background-position: center bottom -10px; background-repeat: no-repeat;
+            opacity: 0.12; z-index: 0; pointer-events: none;
             -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
             mask-image: linear-gradient(to bottom, transparent 0%, black 40%, black 80%, transparent 100%);
         }
-
-        @media (min-width: 768px) {
-            #familia::before { background-size: 40%; }
-        }
-
-        #familia .container {
-            position: relative;
-            z-index: 2; /* Asegura que el texto y tarjetas queden sobre la marca de agua */
-        }
+        @media (min-width: 768px) { #familia::before { background-size: 40%; } }
+        #familia .container { position: relative; z-index: 2; }
 
         .welcome-text { text-align: center; font-size: 1.2rem; color: var(--c-text); line-height: 1.8; margin-bottom: 2rem; }
 
-        .family-card {
-            background: var(--c-white); border-radius: var(--radius-lg); padding: 3rem 2rem;
-            box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(56, 182, 255, 0.2);
-        }
+        .family-card { background: var(--c-white); border-radius: var(--radius-lg); padding: 3rem 2rem; box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(56, 182, 255, 0.2); }
         .family-group { margin-bottom: 2.5rem; }
         .family-group h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--c-accent-dark); margin-bottom: 1rem; font-weight: 700;}
         .family-group p { font-family: var(--f-elegant); font-size: 1.4rem; color: var(--c-navy); margin-bottom: 0.3rem; }
@@ -426,61 +221,73 @@
         .time-box label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-top: 0.5rem; display: block; font-weight: 600;}
 
         .events-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 3rem; }
-        .arch-card {
-            background: var(--c-white); border-radius: var(--radius-arch); padding: 4rem 2rem 3rem;
-            text-align: center; box-shadow: var(--shadow-md); position: relative;
-            border: 1px solid rgba(17, 24, 39, 0.05); border-top: 8px solid var(--c-navy);
-        }
+        .arch-card { background: var(--c-white); border-radius: var(--radius-arch); padding: 4rem 2rem 3rem; text-align: center; box-shadow: var(--shadow-md); position: relative; border: 1px solid rgba(17, 24, 39, 0.05); border-top: 8px solid var(--c-navy); }
         .arch-card.accent-top { border-top: 8px solid var(--c-accent); }
         
-        .arch-icon {
-            width: 60px; height: 60px; background: var(--c-cream); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
-            color: var(--c-accent-dark); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-        }
+        .arch-icon { width: 60px; height: 60px; background: var(--c-cream); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--c-accent-dark); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); }
         .arch-icon svg { width: 30px; height: 30px; fill: currentColor; }
         
         .arch-card h3 { font-family: var(--f-elegant); font-size: 2rem; color: var(--c-navy); margin-bottom: 0.5rem; }
         .arch-card .time { font-family: var(--f-heading); font-weight: 700; color: var(--c-accent-dark); font-size: 1.2rem; margin-bottom: 1.5rem; }
         .arch-card p { color: var(--c-text-light); margin-bottom: 1.5rem; font-size: 1rem; }
         
-        .special-note {
-            display: inline-block; background: rgba(56, 182, 255, 0.1); color: var(--c-accent-dark);
-            padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-            margin-bottom: 1.5rem; border: 1px dashed var(--c-accent);
-        }
+        .special-note { display: inline-block; background: rgba(56, 182, 255, 0.1); color: var(--c-accent-dark); padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; margin-bottom: 1.5rem; border: 1px dashed var(--c-accent); }
 
         .timeline { position: relative; max-width: 400px; margin: 3rem auto 0; padding: 1rem 0; }
-        .timeline::before {
-            content: ''; position: absolute; top: 0; left: 24px; height: 100%; width: 2px; background: dashed 2px var(--c-accent);
-        }
+        .timeline::before { content: ''; position: absolute; top: 0; left: 24px; height: 100%; width: 2px; background: dashed 2px var(--c-accent); }
         .timeline-item { position: relative; padding-left: 60px; margin-bottom: 2.5rem; }
         .timeline-item:last-child { margin-bottom: 0; }
-        .timeline-icon {
-            position: absolute; left: 0; top: 0; width: 50px; height: 50px;
-            background: var(--c-navy); color: var(--c-white); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-            z-index: 2; box-shadow: 0 0 0 6px var(--c-cream);
-        }
+        .timeline-icon { position: absolute; left: 0; top: 0; width: 50px; height: 50px; background: var(--c-navy); color: var(--c-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; z-index: 2; box-shadow: 0 0 0 6px var(--c-cream); }
         .timeline-content h4 { color: var(--c-navy); font-size: 1.1rem; margin-bottom: 0.2rem; font-weight: 700;}
         .timeline-content p { font-size: 0.95rem; color: var(--c-text-light); }
 
-        .rsvp-section { background: var(--c-white); text-align: center; padding-bottom: 8rem; position: relative; }
-        .rsvp-section::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
-            background: linear-gradient(90deg, var(--c-navy), var(--c-accent), var(--c-navy));
-        }
+        .rsvp-section { background: var(--c-white); text-align: center; padding-bottom: 5rem; position: relative; }
+        .rsvp-section::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--c-navy), var(--c-accent), var(--c-navy)); }
         .signature { margin-top: 3rem; font-family: 'Great Vibes', var(--f-elegant); font-size: 2.5rem; color: var(--c-navy); }
 
-        .fab {
-            position: fixed; bottom: 2rem; right: 1.5rem; width: 60px; height: 60px;
-            background: #25D366; color: white; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
-            z-index: 1000; transition: transform 0.3s ease;
-        }
+        .fab { position: fixed; bottom: 2rem; right: 1.5rem; width: 60px; height: 60px; background: #25D366; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000; transition: transform 0.3s ease; }
         .fab:active { transform: scale(0.9); }
         .fab svg { width: 32px; height: 32px; fill: currentColor; }
 
+        /* ==========================================================================
+           6. FOOTER MARCA PERSONAL (GumBuddy)
+           ========================================================================== */
+        .creator-footer {
+            background: #0f172a; /* Tono oscuro profundo para separar de la invitación */
+            padding: 3.5rem 1.5rem 6rem 1.5rem; /* Padding inferior extra para el FAB de WhatsApp */
+            text-align: center;
+            border-top: 1px solid rgba(56, 182, 255, 0.15);
+        }
+        .creator-footer p {
+            color: #9CA3AF;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            font-family: var(--f-body);
+        }
+        .creator-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(31, 41, 55, 0.8);
+            border: 1px solid rgba(56, 182, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            color: var(--c-white);
+            font-family: var(--f-heading);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .creator-btn:hover {
+            background: rgba(56, 182, 255, 0.1);
+            border-color: var(--c-accent);
+            transform: translateY(-2px);
+        }
+        .creator-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+        }
     </style>
 </head>
 <body class="no-scroll">
@@ -497,15 +304,10 @@
 
     <!-- PANTALLA DE BIENVENIDA (EL SOBRE 3D) -->
     <div id="welcome-screen" class="welcome-screen">
-        
         <h1 class="welcome-title">MI BAUTIZO</h1>
         
-        <!-- Contenedor del sobre -->
         <div class="envelope-wrapper" id="btn-open-invite">
-            <!-- Fondo del sobre (Adentro) -->
             <div class="env-back"></div>
-            
-            <!-- TARJETA CON IMAGEN DEL JEFE EN PAÑALES QUE SALE AL ABRIRSE -->
             <div class="env-card">
                 <img src="https://www.eldiario.net/noticias/2017/2017_04/nt170405/f_2017-04-05_4.jpg" alt="Jefe en Pañales" class="env-card-img">
                 <div class="env-card-text">
@@ -514,16 +316,12 @@
                 </div>
             </div>
             
-            <!-- Solapas estáticas -->
             <div class="env-left"></div>
             <div class="env-right"></div>
             <div class="env-bottom"></div>
             
-            <!-- Solapa que se abre (Flap Top) -->
             <div class="env-top-wrapper">
                 <div class="env-top-bg"></div>
-                
-                <!-- Sello de cera (Navy) con Paloma de la Paz (Celeste) -->
                 <div class="wax-seal">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 30px; height: 30px; fill: var(--c-accent);">
                         <path d="M382.3 64.3c-24.6 24.6-28.5 63.6-9.6 92.1l11 16.4L364 186.2c-29.4 17-64.4 17.9-94.6 2.5l-6.8-3.5c-20.3-10.5-44-11.3-64.8-2.3l-142.1 61c-15.6 6.7-22.8 24.8-16.1 40.4s24.8 22.8 40.4 16.1L222 239.5c6.9-3 14.8-2.7 21.5 .8l6.8 3.5c45.4 23.1 97.9 21.8 142.1-3.7l19.7-11.4 11 16.4c28.3 42.5 18 100-24.6 131.9L242.7 493.5c-15.3 11.5-37.1 10.6-51.4-2.1L82.1 386.1c-15.6-14-37.7-16-55.5-5L8.9 391.5C3 394.8-.4 402.1 1.7 408.8s8.8 11.5 15.6 11.2l49.8-2.4c6.2-.3 12.1 1.8 16.7 6l109.1 105.3c21.4 20.7 54.1 22 76.9 3.2L425.6 374c64-47.9 79.4-134.1 36.8-202.1l-11-16.4 19.7-11.4c21.6-12.5 28.9-39.8 16.4-61.4l-11-16.4C463.9 44.4 425 40.5 400.4 65.1l-18.1 18.1L382.3 64.3z"/>
@@ -531,24 +329,18 @@
                 </div>
             </div>
         </div>
-        
-        <!-- Texto que invita a la acción -->
         <p class="envelope-hint">Toca el sobre para abrir</p>
-        
     </div>
 
     <!-- 1. HERO PRINCIPAL -->
     <header class="hero" id="home">
         <div class="container reveal">
-            <!-- Icono decorativo -->
             <img src="https://cdn-icons-png.flaticon.com/512/3283/3283112.png" alt="Jefe en Pañales" class="boss-baby-icon">
-            
             <h2>Acompáñanos a celebrar el</h2>
             <h1 class="font-elegant">Bautizo</h1>
             <p style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem;">de nuestro hijo</p>
             <h3>Eithan Daniel</h3>
             
-            <!-- FOTO DEL BEBÉ -->
             <div class="baby-photo-container">
                 <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Eithan Daniel" class="baby-photo">
             </div>
@@ -556,7 +348,6 @@
             <p style="font-size: 0.85rem; color: var(--c-text-light); text-transform: uppercase; letter-spacing: 2px; margin-top: 1rem; font-weight: 600;">
                 27 de Junio, 2026
             </p>
-            
             <div class="divider"></div>
         </div>
     </header>
@@ -568,21 +359,17 @@
                 "Doy gracias a Dios por haberme dado la vida.<br>
                 A mis padres por haberme esperado con tanto amor."
             </p>
-            
             <div class="family-card">
                 <div class="family-group">
                     <h3>Mis Padres</h3>
                     <p>Johana Gisela Azcorra Moguel</p>
                     <p>Alan de Jesus Aviles Rosado</p>
                 </div>
-                
                 <div class="divider" style="height: 1px; width: 100px; background: rgba(56, 182, 255, 0.4);"></div>
-                
                 <div class="family-group" style="margin-top: 2.5rem; margin-bottom: 0;">
                     <h3>Mis Padrinos</h3>
                     <p>Jorge Luis Chan González</p>
                     <p>Lucy Yadira Vera Rosado</p>
-                    
                     <p style="font-size: 0.95rem; font-family: var(--f-body); color: var(--c-text-light); font-style: italic; margin-top: 1.5rem; line-height: 1.6;">
                         "A mis padrinos porque me guiarán por el camino de la fe. Y a ustedes por acompañarme en este día tan importante."
                     </p>
@@ -591,7 +378,7 @@
         </div>
     </section>
 
-    <!-- IMAGEN DIVISORA 1 (Antes del contador) -->
+    <!-- IMAGEN DIVISORA 1 -->
     <div class="image-divider image-divider-1"></div>
 
     <!-- 3. CONTADOR REGRESIVO -->
@@ -599,24 +386,11 @@
         <div class="container reveal">
             <h2 class="font-elegant" style="font-size: 2.5rem; color: var(--c-white); margin-bottom: 0.5rem;">Faltan</h2>
             <p style="color: var(--c-accent); letter-spacing: 2px; font-size: 0.85rem; text-transform: uppercase; font-weight: 600;">Para el gran día</p>
-            
             <div class="countdown-wrapper" id="countdown">
-                <div class="time-box">
-                    <span id="days">00</span>
-                    <label>Días</label>
-                </div>
-                <div class="time-box">
-                    <span id="hours">00</span>
-                    <label>Horas</label>
-                </div>
-                <div class="time-box">
-                    <span id="minutes">00</span>
-                    <label>Min</label>
-                </div>
-                <div class="time-box">
-                    <span id="seconds">00</span>
-                    <label>Seg</label>
-                </div>
+                <div class="time-box"><span id="days">00</span><label>Días</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Horas</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Seg</label></div>
             </div>
         </div>
     </section>
@@ -626,45 +400,24 @@
         <div class="container">
             <h2 class="text-navy text-center font-elegant reveal" style="font-size: 2.5rem;">Dónde & Cuándo</h2>
             <div class="divider"></div>
-            
             <div class="events-grid">
-                <!-- Tarjeta de Ceremonia (Estilo Arco) -->
+                <!-- Ceremonia -->
                 <div class="arch-card reveal">
-                    <div class="arch-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12,3L1,9L5,11.18V21H19V11.18L23,9L12,3M12,5.7L18.46,9.15L12,12.6L5.54,9.15L12,5.7M11,14H13V16H15V18H13V20H11V18H9V16H11V14Z"/></svg>
-                    </div>
+                    <div class="arch-icon"><svg viewBox="0 0 24 24"><path d="M12,3L1,9L5,11.18V21H19V11.18L23,9L12,3M12,5.7L18.46,9.15L12,12.6L5.54,9.15L12,5.7M11,14H13V16H15V18H13V20H11V18H9V16H11V14Z"/></svg></div>
                     <h3>Ceremonia Religiosa</h3>
                     <div class="time">9:00 AM</div>
-                    <p>
-                        <strong>Parroquia Guadalupe Tepeyac</strong><br>
-                        Col. Vista Hermosa
-                    </p>
-                    
-                    <a href="https://maps.google.com/?q=Parroquia+Guadalupe+Tepeyac+Vista+Hermosa" target="_blank" class="btn btn-primary" style="width:100%; margin-top: 1rem;">
-                        Ver Ubicación
-                    </a>
+                    <p><strong>Parroquia Guadalupe Tepeyac</strong><br>Col. Vista Hermosa</p>
+                    <a href="https://maps.google.com/?q=Parroquia+Guadalupe+Tepeyac+Vista+Hermosa" target="_blank" class="btn btn-primary" style="width:100%; margin-top: 1rem;">Ver Ubicación</a>
                 </div>
 
-                <!-- Tarjeta de Recepción (Estilo Arco Celeste) -->
+                <!-- Recepción -->
                 <div class="arch-card accent-top reveal">
-                    <div class="arch-icon">
-                        <svg viewBox="0 0 24 24"><path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z"/></svg>
-                    </div>
+                    <div class="arch-icon"><svg viewBox="0 0 24 24"><path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z"/></svg></div>
                     <h3>Recepción</h3>
                     <div class="time">12:00 PM</div>
-                    
-                    <div class="special-note">
-                        🏊‍♂️ ¡Llevar traje de baño!
-                    </div>
-
-                    <p>
-                        <strong>Salón Solaris</strong><br>
-                        C. Morelos #22 entre 108 y Miguel Hidalgo, Col. Bellavista
-                    </p>
-                    
-                    <a href="https://maps.app.goo.gl/wN5rRieqzWV9k1py9" target="_blank" class="btn btn-accent" style="width:100%; margin-top: 1rem; color: #fff;">
-                        Ver Ubicación
-                    </a>
+                    <div class="special-note">🏊‍♂️ ¡Llevar traje de baño!</div>
+                    <p><strong>Salón Solaris</strong><br>C. Morelos #22 entre 108 y Miguel Hidalgo, Col. Bellavista</p>
+                    <a href="https://maps.app.goo.gl/wN5rRieqzWV9k1py9" target="_blank" class="btn btn-accent" style="width:100%; margin-top: 1rem; color: #fff;">Ver Ubicación</a>
                 </div>
             </div>
         </div>
@@ -675,73 +428,45 @@
         <div class="container reveal">
             <h2 class="text-navy text-center font-elegant" style="font-size: 2.5rem;">Itinerario</h2>
             <p class="text-center" style="color: var(--c-accent-dark); text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; font-weight: 600;">Horarios del evento</p>
-            
             <div class="timeline">
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">⛪</div>
-                    <div class="timeline-content">
-                        <h4>9:00 AM</h4>
-                        <p>Ceremonia Religiosa</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon" style="background: var(--c-accent);">🥂</div>
-                    <div class="timeline-content">
-                        <h4>12:00 PM</h4>
-                        <p>Recepción en Salón Solaris</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">🎂</div>
-                    <div class="timeline-content">
-                        <h4>2:00 PM</h4>
-                        <p>Show Infantil, Pastel y Mañanitas</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon" style="background: var(--c-accent);">🎹</div>
-                    <div class="timeline-content">
-                        <h4>4:00 PM - 8:00 PM</h4>
-                        <p>Música en vivo con Tecladista</p>
-                    </div>
-                </div>
+                <div class="timeline-item reveal"><div class="timeline-icon">⛪</div><div class="timeline-content"><h4>9:00 AM</h4><p>Ceremonia Religiosa</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-icon" style="background: var(--c-accent);">🥂</div><div class="timeline-content"><h4>12:00 PM</h4><p>Recepción en Salón Solaris</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-icon">🎂</div><div class="timeline-content"><h4>2:00 PM</h4><p>Show Infantil, Pastel y Mañanitas</p></div></div>
+                <div class="timeline-item reveal"><div class="timeline-icon" style="background: var(--c-accent);">🎹</div><div class="timeline-content"><h4>4:00 PM - 8:00 PM</h4><p>Música en vivo con Tecladista</p></div></div>
             </div>
         </div>
     </section>
 
-    <!-- IMAGEN DIVISORA 2 (Antes de la confirmación) -->
+    <!-- IMAGEN DIVISORA 2 -->
     <div class="image-divider image-divider-2"></div>
 
     <!-- 6. CONFIRMACIÓN Y MENSAJE FINAL -->
     <section class="section-padding rsvp-section" id="asistencia">
         <div class="container reveal">
             <h2 class="font-elegant text-navy" style="font-size: 2.5rem; margin-bottom: 1rem;">Confirmación</h2>
-            <p style="color: var(--c-text-light); margin-bottom: 3rem;">
-                Por favor, confírmanos tu asistencia para contemplarte en este día tan especial.
-            </p>
-            
-            <a href="#" id="btn-confirmar" target="_blank" class="btn btn-primary" style="margin-bottom: 4rem; padding: 0 3rem; min-height: 54px;">
-                Confirmar Asistencia
-            </a>
-
+            <p style="color: var(--c-text-light); margin-bottom: 3rem;">Por favor, confírmanos tu asistencia para contemplarte en este día tan especial.</p>
+            <a href="#" id="btn-confirmar" target="_blank" class="btn btn-primary" style="margin-bottom: 4rem; padding: 0 3rem; min-height: 54px;">Confirmar Asistencia</a>
             <div class="divider"></div>
-
             <div style="margin-top: 3rem;">
-                <p class="font-elegant" style="font-size: 1.3rem; color: var(--c-navy); line-height: 1.8;">
-                    "Hoy recibo una bendición especial y me encantaría compartir este momento contigo."
-                </p>
-                <div class="signature">
-                    Eithan Daniel
-                </div>
+                <p class="font-elegant" style="font-size: 1.3rem; color: var(--c-navy); line-height: 1.8;">"Hoy recibo una bendición especial y me encantaría compartir este momento contigo."</p>
+                <div class="signature">Eithan Daniel</div>
             </div>
         </div>
     </section>
 
-    <!-- 7. BOTÓN FLOTANTE DE WHATSAPP -->
+    <!-- 7. FOOTER MARCA PERSONAL (GUMBUDDY) -->
+    <footer class="creator-footer">
+        <p>¿Te gustaría una invitación como esta para tu evento?</p>
+        <a href="https://portafolio.devprojects.space/dise%C3%B1o_digital.html" target="_blank" class="creator-btn">
+            <!-- Cargamos tu avatar directo desde tu perfil de GitHub de forma automática -->
+            <img src="https://github.com/GumBuddy.png" alt="GumBuddy Logo" class="creator-logo">
+            <span>Diseñado por <strong>Angelo Azcorra</strong></span>
+        </a>
+    </footer>
+
+    <!-- 8. BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="#" id="fab-whatsapp" class="fab" target="_blank" aria-label="Confirmar asistencia por WhatsApp">
-        <svg viewBox="0 0 24 24">
-            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.5 14.27C13.33 14.44 13.17 14.46 12.92 14.33C12.67 14.21 11.85 13.93 10.88 13.06C10.12 12.38 9.61 11.53 9.46 11.27C9.3 11 9.44 10.86 9.57 10.74C9.67 10.63 9.81 10.45 9.93 10.31C10.05 10.16 10.09 10.06 10.17 9.89C10.25 9.72 10.2 9.58 10.15 9.46C10.09 9.33 9.61 8.13 9.41 7.64C9.21 7.16 9.03 7.23 8.87 7.23C8.73 7.23 8.57 7.23 8.53 7.33Z"/>
-        </svg>
+        <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.27 13.3 16.42 13.66 16.53C14.25 16.72 14.79 16.69 15.22 16.63C15.7 16.56 16.68 16.03 16.89 15.45C17.1 14.87 17.1 14.38 17.04 14.27C16.97 14.17 16.81 14.11 16.56 14C16.31 13.86 15.09 13.26 14.87 13.18C14.64 13.1 14.5 13.06 14.31 13.3C14.15 13.55 13.67 14.11 13.5 14.27C13.33 14.44 13.17 14.46 12.92 14.33C12.67 14.21 11.85 13.93 10.88 13.06C10.12 12.38 9.61 11.53 9.46 11.27C9.3 11 9.44 10.86 9.57 10.74C9.67 10.63 9.81 10.45 9.93 10.31C10.05 10.16 10.09 10.06 10.17 9.89C10.25 9.72 10.2 9.58 10.15 9.46C10.09 9.33 9.61 8.13 9.41 7.64C9.21 7.16 9.03 7.23 8.87 7.23C8.73 7.23 8.57 7.23 8.53 7.33Z"/></svg>
     </a>
 
     <!-- SCRIPTS -->
@@ -752,138 +477,74 @@
             mensajeWhatsApp: "¡Hola! Confirmo mi asistencia al Bautizo y 1er Año de Eithan Daniel. 👶👔"
         };
 
-        // Variables para el reproductor de YouTube
         var ytPlayer;
         var isPlaying = false;
         
         function onYouTubeIframeAPIReady() {
             ytPlayer = new YT.Player('youtube-player', {
-                height: '10', 
-                width: '10',
-                videoId: 'c7IsedOEySU', 
-                playerVars: {
-                    'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1,
-                    'playsinline': 1, 'playlist': 'c7IsedOEySU'
-                }
+                height: '10', width: '10', videoId: 'c7IsedOEySU', 
+                playerVars: { 'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1, 'playsinline': 1, 'playlist': 'c7IsedOEySU' }
             });
         }
 
         document.addEventListener("DOMContentLoaded", () => {
-            configurarWhatsApp();
-            iniciarContador(configData.fechaEventoCountdown);
-            iniciarAnimacionesScroll();
-            configurarInteraccionesIniciales();
+            configurarWhatsApp(); iniciarContador(configData.fechaEventoCountdown);
+            iniciarAnimacionesScroll(); configurarInteraccionesIniciales();
         });
 
-        /**
-         * Lógica del Sobre 3D y la Música
-         */
         function configurarInteraccionesIniciales() {
             const btnEnvelope = document.getElementById('btn-open-invite');
             const welcomeScreen = document.getElementById('welcome-screen');
-            const body = document.body;
             const musicToggle = document.getElementById('music-toggle');
 
-            // Al hacer clic en cualquier parte del sobre
             btnEnvelope.addEventListener('click', () => {
-                
-                // 1. Inicia la animación 3D de la solapa y oculta el texto guía
                 btnEnvelope.classList.add('is-opening');
-                
-                // 2. Espera a que termine la animación del sobre (3.2 segundos) 
-                // Esto permite que el usuario vea salir al Jefe en Pañales y lea el nombre
                 setTimeout(() => {
                     welcomeScreen.classList.add('open');
-                    body.classList.remove('no-scroll');
+                    document.body.classList.remove('no-scroll');
                     musicToggle.classList.add('visible');
                     
-                    // Reproducir el video de YouTube oculto
                     if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                        ytPlayer.setVolume(70);
-                        ytPlayer.playVideo();
-                        isPlaying = true;
-                        musicToggle.classList.add('playing');
+                        ytPlayer.setVolume(70); ytPlayer.playVideo(); isPlaying = true; musicToggle.classList.add('playing');
                     }
                 }, 3200);
             });
 
-            // Control manual de Play/Pause de la música
             musicToggle.addEventListener('click', () => {
                 if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                    if (isPlaying) {
-                        ytPlayer.pauseVideo();
-                        musicToggle.classList.remove('playing');
-                    } else {
-                        ytPlayer.playVideo();
-                        musicToggle.classList.add('playing');
-                    }
+                    if (isPlaying) { ytPlayer.pauseVideo(); musicToggle.classList.remove('playing'); } 
+                    else { ytPlayer.playVideo(); musicToggle.classList.add('playing'); }
                     isPlaying = !isPlaying;
                 }
             });
         }
 
-        /**
-         * Lógica del WhatsApp Link
-         */
         function configurarWhatsApp() {
-            const num = configData.telefonoWhatsApp;
-            const msj = encodeURIComponent(configData.mensajeWhatsApp);
-            const link = `https://wa.me/${num}?text=${msj}`;
-            
+            const link = `https://wa.me/${configData.telefonoWhatsApp}?text=${encodeURIComponent(configData.mensajeWhatsApp)}`;
             document.getElementById('btn-confirmar').href = link;
             document.getElementById('fab-whatsapp').href = link;
         }
 
-        /**
-         * Lógica del Contador Regresivo
-         */
         function iniciarContador(fechaDestinoStr) {
             const targetDate = new Date(fechaDestinoStr).getTime();
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minsEl = document.getElementById('minutes');
-            const secsEl = document.getElementById('seconds');
+            const elements = { d: document.getElementById('days'), h: document.getElementById('hours'), m: document.getElementById('minutes'), s: document.getElementById('seconds') };
 
             const timerInterval = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = targetDate - now;
-
-                if (distance < 0) {
-                    clearInterval(timerInterval);
-                    daysEl.innerText = "00"; hoursEl.innerText = "00";
-                    minsEl.innerText = "00"; secsEl.innerText = "00";
-                    return;
-                }
-
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                daysEl.innerText = days < 10 ? "0" + days : days;
-                hoursEl.innerText = hours < 10 ? "0" + hours : hours;
-                minsEl.innerText = minutes < 10 ? "0" + minutes : minutes;
-                secsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
+                const distance = targetDate - new Date().getTime();
+                if (distance < 0) { clearInterval(timerInterval); elements.d.innerText = "00"; elements.h.innerText = "00"; elements.m.innerText = "00"; elements.s.innerText = "00"; return; }
                 
+                elements.d.innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                elements.h.innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                elements.m.innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                elements.s.innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
             }, 1000);
         }
 
-        /**
-         * Lógica de Intersection Observer (Reveal Effect)
-         */
         function iniciarAnimacionesScroll() {
-            const revealElements = document.querySelectorAll('.reveal');
-            const revealOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
-
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (!entry.isIntersecting) return;
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                });
-            }, revealOptions);
-
-            revealElements.forEach(el => revealObserver.observe(el));
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('active'); obs.unobserve(e.target); }});
+            }, { threshold: 0.15, rootMargin: "0px 0px -50px 0px" });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
     </script>
 </body>
