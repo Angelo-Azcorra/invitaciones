@@ -41,7 +41,7 @@
             
             --radius-md: 16px;
             --radius-lg: 24px;
-            --radius-arch: 120px 120px 16px 16px; /* Para las tarjetas estilo arco */
+            --radius-arch: 120px 120px 16px 16px;
         }
 
         * {
@@ -63,28 +63,25 @@
             overflow-x: hidden;
         }
         
-        /* Evitar scroll cuando la portada está activa */
         body.no-scroll {
             overflow: hidden;
             height: 100vh;
         }
 
         /* ==========================================================================
-           2. PANTALLA DE BIENVENIDA (EFECTO SOBRE/PORTADA)
+           2. PANTALLA DE BIENVENIDA (SOBRE 3D REALISTA)
            ========================================================================== */
         .welcome-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--c-navy), var(--c-navy-dark));
+            /* Corrección: Se agregó un color base para evitar superposición visual */
+            background: #F8F5F0 url('https://www.transparenttextures.com/patterns/cream-paper.png');
             z-index: 9999;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 1.2s ease;
-            text-align: center;
-            padding: 2rem;
-            color: var(--c-white);
         }
 
         .welcome-screen.open {
@@ -93,71 +90,116 @@
             pointer-events: none;
         }
 
-        .welcome-content {
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            padding: 3rem 2rem;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            max-width: 400px;
-            width: 100%;
-        }
-
-        .seal-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--c-gold);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: -65px auto 2rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            border: 2px solid var(--c-white);
-            color: var(--c-navy);
+        .welcome-title {
             font-family: var(--f-elegant);
-            font-size: 2rem;
-            font-weight: bold;
-            font-style: italic;
-        }
-
-        .welcome-content h2 {
-            font-family: var(--f-elegant);
-            font-size: 2.2rem;
+            font-size: 3rem;
             color: var(--c-gold);
-            margin-bottom: 0.5rem;
-            font-weight: 400;
+            letter-spacing: 4px;
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
         }
 
-        .welcome-content p {
+        /* Contenedor del sobre */
+        .envelope-wrapper {
+            position: relative;
+            width: 90vw;
+            max-width: 340px;
+            height: 220px;
+            cursor: pointer;
+            perspective: 1000px;
+            margin-bottom: 2rem;
+            animation: pulse-envelope 2.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse-envelope {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        /* Capas 3D del sobre corregidas con z-index */
+        .env-back {
+            position: absolute; inset: 0; 
+            background: #C4B9A3; 
+            border-radius: 4px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            z-index: 1;
+        }
+
+        /* Tarjeta que se desliza hacia arriba */
+        .env-card {
+            position: absolute; inset: 15px 15px 25px 15px; 
+            background: #FFFFFF; 
+            border-radius: 4px;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            /* Delay de 0.4s para que la solapa se abra primero */
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s;
+            padding-top: 30px;
+            z-index: 2; /* Permanece dentro del sobre */
+        }
+        .env-card span { font-family: var(--f-elegant); font-size: 1.3rem; color: var(--c-navy); margin-bottom: 5px; text-align: center; }
+        .env-card p { font-family: var(--f-heading); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--c-gold); }
+
+        .env-left { position: absolute; inset: 0; background: #E6E0D4; clip-path: polygon(0 0, 50% 50%, 0 100%); border-radius: 4px; z-index: 3; }
+        .env-right { position: absolute; inset: 0; background: #E6E0D4; clip-path: polygon(100% 0, 50% 50%, 100% 100%); border-radius: 4px; z-index: 3; }
+        .env-bottom { position: absolute; inset: 0; background: #F2EFE9; clip-path: polygon(0 100%, 50% 45%, 100% 100%); border-radius: 4px; z-index: 3; filter: drop-shadow(0 -2px 4px rgba(0,0,0,0.05)); }
+
+        .env-top-wrapper {
+            position: absolute; inset: -1px;
+            transform-origin: top;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
+            transform-style: preserve-3d;
+        }
+        .env-top-bg {
+            position: absolute; inset: 0;
+            background: #F8F5F0;
+            clip-path: polygon(0 0, 100% 0, 50% 55%);
+            border-radius: 4px 4px 0 0;
+            backface-visibility: hidden;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 55%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 65px; height: 65px;
+            background: var(--c-blue-pastel);
+            border-radius: 50%;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2), inset 0 2px 5px rgba(255,255,255,0.5);
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid rgba(255,255,255,0.6);
+            backface-visibility: hidden;
+        }
+
+        /* Texto guía para interactuar */
+        .envelope-hint {
+            margin-top: 3rem;
+            font-family: var(--f-heading);
             font-size: 0.9rem;
+            color: var(--c-navy);
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 2.5rem;
-            color: var(--c-blue-pastel);
+            animation: pulse-hint 1.5s infinite alternate;
+            text-align: center;
+            transition: opacity 0.3s;
         }
 
-        .btn-open {
-            background: var(--c-white);
-            color: var(--c-navy);
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-family: var(--f-heading);
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: pulse-gold 2s infinite;
+        @keyframes pulse-hint {
+            0% { opacity: 0.5; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-5px); }
         }
-        
-        .btn-open:active { transform: scale(0.95); }
 
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
-        }
+        /* Animación activa al hacer clic en el sobre */
+        .envelope-wrapper.is-opening { animation: none; pointer-events: none; }
+        .envelope-wrapper.is-opening .env-top-wrapper { transform: rotateX(180deg); }
+        .envelope-wrapper.is-opening .env-card { transform: translateY(-90px); }
+        /* Oculta el texto guía al abrir */
+        .envelope-wrapper.is-opening ~ .envelope-hint { opacity: 0; }
+
 
         /* ==========================================================================
            3. CONTROLES DE MÚSICA
@@ -190,16 +232,9 @@
         .music-control.playing { animation: spin-slow 4s linear infinite; }
         @keyframes spin-slow { 100% { transform: rotate(360deg); } }
 
-        /* Contenedor invisible para YouTube optimizado para móviles */
         #youtube-container {
-            position: absolute;
-            top: -1000px;
-            left: -1000px;
-            width: 10px;
-            height: 10px;
-            opacity: 0.01;
-            pointer-events: none;
-            z-index: -1;
+            position: absolute; top: -1000px; left: -1000px; width: 10px; height: 10px;
+            opacity: 0.01; pointer-events: none; z-index: -1;
         }
 
         /* ==========================================================================
@@ -240,18 +275,11 @@
         .btn-primary { background: var(--c-navy); color: var(--c-white); box-shadow: var(--shadow-md); }
         .btn-gold { background: var(--c-gold); color: var(--c-white); box-shadow: var(--shadow-gold); }
 
-        .divider {
-            width: 1px;
-            height: 60px;
-            background: var(--c-gold);
-            margin: 2rem auto;
-        }
+        .divider { width: 1px; height: 60px; background: var(--c-gold); margin: 2rem auto; }
 
         /* ==========================================================================
            5. SECTIONS
            ========================================================================== */
-        
-        /* Hero Section */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -276,127 +304,43 @@
             50% { transform: translateY(-10px); }
         }
 
-        .hero h2 {
-            font-size: 0.9rem;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--c-navy-light);
-            margin-bottom: 1rem;
-        }
+        .hero h2 { font-size: 0.9rem; letter-spacing: 4px; text-transform: uppercase; color: var(--c-navy-light); margin-bottom: 1rem; }
+        .hero h1 { font-size: 3.5rem; color: var(--c-navy); margin-bottom: 0.5rem; }
+        .hero h3 { font-size: 1.5rem; color: var(--c-gold); margin-bottom: 2rem; letter-spacing: 1px; }
 
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--c-navy);
-            margin-bottom: 0.5rem;
-        }
-
-        .hero h3 {
-            font-size: 1.5rem;
-            color: var(--c-gold);
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
-        }
-
-        /* Baby Photo Profile */
         .baby-photo-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 2rem;
-            border-radius: 50%;
-            padding: 8px;
-            background: linear-gradient(135deg, var(--c-gold), var(--c-gold-light));
-            box-shadow: var(--shadow-md);
+            width: 180px; height: 180px; margin: 0 auto 2rem; border-radius: 50%; padding: 8px;
+            background: linear-gradient(135deg, var(--c-gold), var(--c-gold-light)); box-shadow: var(--shadow-md);
         }
-        .baby-photo {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--c-white);
-        }
+        .baby-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 4px solid var(--c-white); }
 
-        /* Family Section */
-        .welcome-text {
-            text-align: center;
-            font-size: 1.2rem;
-            color: var(--c-text);
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
+        .welcome-text { text-align: center; font-size: 1.2rem; color: var(--c-text); line-height: 1.8; margin-bottom: 2rem; }
 
         .family-card {
-            background: var(--c-white);
-            border-radius: var(--radius-lg);
-            padding: 3rem 2rem;
-            box-shadow: var(--shadow-sm);
-            text-align: center;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: var(--c-white); border-radius: var(--radius-lg); padding: 3rem 2rem;
+            box-shadow: var(--shadow-sm); text-align: center; border: 1px solid rgba(212, 175, 55, 0.2);
         }
-
         .family-group { margin-bottom: 2.5rem; }
-        .family-group h3 { 
-            font-size: 0.85rem; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            color: var(--c-gold); 
-            margin-bottom: 1rem; 
-        }
-        .family-group p { 
-            font-family: var(--f-elegant); 
-            font-size: 1.4rem; 
-            color: var(--c-navy); 
-            margin-bottom: 0.3rem; 
-        }
+        .family-group h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: var(--c-gold); margin-bottom: 1rem; }
+        .family-group p { font-family: var(--f-elegant); font-size: 1.4rem; color: var(--c-navy); margin-bottom: 0.3rem; }
 
-        /* Countdown */
         .countdown-section { background: var(--c-navy); color: var(--c-white); }
         .countdown-wrapper { display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; }
         .time-box { text-align: center; }
-        .time-box span { 
-            font-family: var(--f-elegant); 
-            font-size: 2.5rem; 
-            color: var(--c-gold); 
-            display: block; 
-            line-height: 1; 
-        }
-        .time-box label { 
-            font-size: 0.75rem; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            opacity: 0.8; 
-            margin-top: 0.5rem; 
-            display: block;
-        }
+        .time-box span { font-family: var(--f-elegant); font-size: 2.5rem; color: var(--c-gold); display: block; line-height: 1; }
+        .time-box label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.8; margin-top: 0.5rem; display: block; }
 
-        /* Event Details (ARCH CARDS) */
-        .events-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-        
+        .events-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 3rem; }
         .arch-card {
-            background: var(--c-white);
-            border-radius: var(--radius-arch);
-            padding: 4rem 2rem 3rem;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            border: 1px solid rgba(30, 58, 95, 0.05);
-            border-top: 8px solid var(--c-navy);
+            background: var(--c-white); border-radius: var(--radius-arch); padding: 4rem 2rem 3rem;
+            text-align: center; box-shadow: var(--shadow-md); position: relative;
+            border: 1px solid rgba(30, 58, 95, 0.05); border-top: 8px solid var(--c-navy);
         }
-
         .arch-card.gold-top { border-top: 8px solid var(--c-gold); }
-
         .arch-icon {
-            width: 60px; height: 60px;
-            background: var(--c-cream);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 1.5rem;
-            color: var(--c-gold);
-            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            width: 60px; height: 60px; background: var(--c-cream); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem;
+            color: var(--c-gold); box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
         .arch-icon svg { width: 30px; height: 30px; fill: currentColor; }
         
@@ -405,60 +349,38 @@
         .arch-card p { color: var(--c-text-light); margin-bottom: 1.5rem; font-size: 1rem; }
         
         .special-note {
-            display: inline-block;
-            background: rgba(212, 175, 55, 0.1);
-            color: #A68A2A;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            border: 1px dashed var(--c-gold);
+            display: inline-block; background: rgba(212, 175, 55, 0.1); color: #A68A2A;
+            padding: 0.5rem 1.5rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 1.5rem; border: 1px dashed var(--c-gold);
         }
 
-        /* Timeline */
         .timeline { position: relative; max-width: 400px; margin: 3rem auto 0; padding: 1rem 0; }
         .timeline::before {
-            content: ''; position: absolute; top: 0; left: 24px; height: 100%; width: 1px;
-            background: dashed 1px var(--c-gold);
+            content: ''; position: absolute; top: 0; left: 24px; height: 100%; width: 1px; background: dashed 1px var(--c-gold);
         }
         .timeline-item { position: relative; padding-left: 60px; margin-bottom: 2.5rem; }
         .timeline-item:last-child { margin-bottom: 0; }
         .timeline-icon {
             position: absolute; left: 0; top: 0; width: 50px; height: 50px;
-            background: var(--c-navy); color: var(--c-white);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; z-index: 2; box-shadow: 0 0 0 6px var(--c-cream);
+            background: var(--c-navy); color: var(--c-white); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+            z-index: 2; box-shadow: 0 0 0 6px var(--c-cream);
         }
         .timeline-content h4 { color: var(--c-navy); font-size: 1.1rem; margin-bottom: 0.2rem; }
         .timeline-content p { font-size: 0.95rem; color: var(--c-text-light); }
 
-        /* RSVP */
-        .rsvp-section {
-            background: var(--c-white);
-            text-align: center;
-            padding-bottom: 8rem;
-            position: relative;
-        }
+        .rsvp-section { background: var(--c-white); text-align: center; padding-bottom: 8rem; position: relative; }
         .rsvp-section::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
             background: linear-gradient(90deg, var(--c-navy), var(--c-gold), var(--c-navy));
         }
+        .signature { margin-top: 3rem; font-family: 'Great Vibes', var(--f-elegant); font-size: 2.5rem; color: var(--c-navy); }
 
-        .signature {
-            margin-top: 3rem;
-            font-family: 'Great Vibes', var(--f-elegant);
-            font-size: 2.5rem;
-            color: var(--c-navy);
-        }
-
-        /* Floating WhatsApp */
         .fab {
-            position: fixed; bottom: 2rem; right: 1.5rem;
-            width: 60px; height: 60px; background: #25D366; color: white;
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); z-index: 1000;
-            transition: transform 0.3s ease;
+            position: fixed; bottom: 2rem; right: 1.5rem; width: 60px; height: 60px;
+            background: #25D366; color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000; transition: transform 0.3s ease;
         }
         .fab:active { transform: scale(0.9); }
         .fab svg { width: 32px; height: 32px; fill: currentColor; }
@@ -468,7 +390,6 @@
 <body class="no-scroll">
 
     <!-- REPRODUCTOR DE YOUTUBE OCULTO -->
-    <!-- Contenedor invisible para cargar la música desde YouTube -->
     <div id="youtube-container">
         <div id="youtube-player"></div>
     </div>
@@ -478,14 +399,43 @@
         <svg viewBox="0 0 24 24"><path d="M12,3V12.26C11.5,12.09 11,12 10.5,12C8,12 6,14 6,16.5C6,19 8,21 10.5,21C13,21 15,19 15,16.5V6H19V3H12Z"/></svg>
     </div>
 
-    <!-- PANTALLA DE BIENVENIDA (EL SOBRE) -->
+    <!-- PANTALLA DE BIENVENIDA (EL SOBRE 3D) -->
     <div id="welcome-screen" class="welcome-screen">
-        <div class="welcome-content">
-            <div class="seal-icon">E</div>
-            <h2>Eithan Daniel</h2>
-            <p>Bautizo y 1er Año</p>
-            <button id="btn-open-invite" class="btn-open">Abrir Invitación</button>
+        
+        <h1 class="welcome-title">MI BAUTIZO</h1>
+        
+        <!-- Contenedor del sobre -->
+        <div class="envelope-wrapper" id="btn-open-invite">
+            <!-- Fondo del sobre (Adentro) -->
+            <div class="env-back"></div>
+            
+            <!-- Tarjeta que sale al abrirse (Corregida) -->
+            <div class="env-card">
+                <span>Eithan Daniel</span>
+                <p>Mi Bautizo</p>
+            </div>
+            
+            <!-- Solapas estáticas -->
+            <div class="env-left"></div>
+            <div class="env-right"></div>
+            <div class="env-bottom"></div>
+            
+            <!-- Solapa que se abre (Flap Top) -->
+            <div class="env-top-wrapper">
+                <div class="env-top-bg"></div>
+                
+                <!-- Sello de cera con Paloma de la Paz real en SVG -->
+                <div class="wax-seal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 30px; height: 30px; fill: var(--c-navy);">
+                        <path d="M382.3 64.3c-24.6 24.6-28.5 63.6-9.6 92.1l11 16.4L364 186.2c-29.4 17-64.4 17.9-94.6 2.5l-6.8-3.5c-20.3-10.5-44-11.3-64.8-2.3l-142.1 61c-15.6 6.7-22.8 24.8-16.1 40.4s24.8 22.8 40.4 16.1L222 239.5c6.9-3 14.8-2.7 21.5 .8l6.8 3.5c45.4 23.1 97.9 21.8 142.1-3.7l19.7-11.4 11 16.4c28.3 42.5 18 100-24.6 131.9L242.7 493.5c-15.3 11.5-37.1 10.6-51.4-2.1L82.1 386.1c-15.6-14-37.7-16-55.5-5L8.9 391.5C3 394.8-.4 402.1 1.7 408.8s8.8 11.5 15.6 11.2l49.8-2.4c6.2-.3 12.1 1.8 16.7 6l109.1 105.3c21.4 20.7 54.1 22 76.9 3.2L425.6 374c64-47.9 79.4-134.1 36.8-202.1l-11-16.4 19.7-11.4c21.6-12.5 28.9-39.8 16.4-61.4l-11-16.4C463.9 44.4 425 40.5 400.4 65.1l-18.1 18.1L382.3 64.3z"/>
+                    </svg>
+                </div>
+            </div>
         </div>
+        
+        <!-- Texto que invita a la acción -->
+        <p class="envelope-hint">Toca el sobre para abrir</p>
+        
     </div>
 
     <!-- 1. HERO PRINCIPAL -->
@@ -599,7 +549,7 @@
                         <svg viewBox="0 0 24 24"><path d="M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z"/></svg>
                     </div>
                     <h3>Recepción</h3>
-                    <div class="time">1:00 PM</div>
+                    <div class="time">12:00 PM</div>
                     
                     <div class="special-note">
                         🏊‍♂️ ¡Llevar traje de baño!
@@ -633,31 +583,24 @@
                     </div>
                 </div>
                 <div class="timeline-item reveal">
-                    <div class="timeline-icon" style="background: var(--c-gold);">📸</div>
+                    <div class="timeline-icon" style="background: var(--c-gold);">🥂</div>
                     <div class="timeline-content">
-                        <h4>10:30 AM</h4>
-                        <p>Sesión de Fotos Familiares</p>
-                    </div>
-                </div>
-                <div class="timeline-item reveal">
-                    <div class="timeline-icon">🥂</div>
-                    <div class="timeline-content">
-                        <h4>1:00 PM</h4>
+                        <h4>12:00 PM</h4>
                         <p>Recepción en Salón Solaris</p>
                     </div>
                 </div>
                 <div class="timeline-item reveal">
-                    <div class="timeline-icon" style="background: var(--c-gold);">🎂</div>
+                    <div class="timeline-icon">🎂</div>
                     <div class="timeline-content">
-                        <h4>3:00 PM</h4>
-                        <p>Pastel y Celebración de mi 1er Añito</p>
+                        <h4>2:00 PM</h4>
+                        <p>Show Infantil, Pastel y Mañanitas</p>
                     </div>
                 </div>
                 <div class="timeline-item reveal">
-                    <div class="timeline-icon">🏊‍♂️</div>
+                    <div class="timeline-icon" style="background: var(--c-gold);">🎹</div>
                     <div class="timeline-content">
-                        <h4>4:00 PM</h4>
-                        <p>Convivencia en piscina</p>
+                        <h4>4:00 PM - 8:00 PM</h4>
+                        <p>Música en vivo con Tecladista</p>
                     </div>
                 </div>
             </div>
@@ -708,29 +651,16 @@
         var ytPlayer;
         var isPlaying = false;
         
-        // Esta función es llamada automáticamente por la API de YouTube cuando está lista
         function onYouTubeIframeAPIReady() {
             ytPlayer = new YT.Player('youtube-player', {
-                height: '10', // Lo más pequeño posible
+                height: '10', 
                 width: '10',
-                videoId: 't3217H8JppI', // River Flows in You - Piano Clásico Hermoso
+                videoId: 't3217H8JppI', // River Flows in You - Piano
                 playerVars: {
-                    'autoplay': 0,
-                    'controls': 0,
-                    'disablekb': 1,
-                    'loop': 1,
-                    'playsinline': 1,
-                    'playlist': 't3217H8JppI' // Requerido para que el loop funcione
-                },
-                events: {
-                    'onReady': onPlayerReady
+                    'autoplay': 0, 'controls': 0, 'disablekb': 1, 'loop': 1,
+                    'playsinline': 1, 'playlist': 't3217H8JppI'
                 }
             });
-        }
-
-        // Se ejecuta cuando el reproductor oculto está listo
-        function onPlayerReady(event) {
-            console.log("Reproductor de música listo.");
         }
 
         document.addEventListener("DOMContentLoaded", () => {
@@ -741,27 +671,35 @@
         });
 
         /**
-         * Lógica del Sobre y la Música con YouTube
+         * Lógica del Sobre 3D y la Música
          */
         function configurarInteraccionesIniciales() {
-            const btnOpen = document.getElementById('btn-open-invite');
+            const btnEnvelope = document.getElementById('btn-open-invite');
             const welcomeScreen = document.getElementById('welcome-screen');
             const body = document.body;
             const musicToggle = document.getElementById('music-toggle');
 
-            // Al hacer clic en "Abrir Invitación"
-            btnOpen.addEventListener('click', () => {
-                welcomeScreen.classList.add('open');
-                body.classList.remove('no-scroll');
-                musicToggle.classList.add('visible');
+            // Al hacer clic en cualquier parte del sobre
+            btnEnvelope.addEventListener('click', () => {
                 
-                // Reproducir el video de YouTube oculto
-                if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                    ytPlayer.setVolume(70);
-                    ytPlayer.playVideo();
-                    isPlaying = true;
-                    musicToggle.classList.add('playing');
-                }
+                // 1. Inicia la animación 3D de la solapa y oculta el texto guía
+                btnEnvelope.classList.add('is-opening');
+                
+                // 2. Espera a que termine la animación del sobre (2.8 segundos) 
+                // Esto permite que el usuario vea la tarjeta salir y lea el nombre antes de avanzar
+                setTimeout(() => {
+                    welcomeScreen.classList.add('open');
+                    body.classList.remove('no-scroll');
+                    musicToggle.classList.add('visible');
+                    
+                    // Reproducir el video de YouTube oculto
+                    if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+                        ytPlayer.setVolume(70);
+                        ytPlayer.playVideo();
+                        isPlaying = true;
+                        musicToggle.classList.add('playing');
+                    }
+                }, 2800);
             });
 
             // Control manual de Play/Pause de la música
