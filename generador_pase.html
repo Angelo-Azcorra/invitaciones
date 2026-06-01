@@ -9,11 +9,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
 
+    <!-- Cargamos html2canvas para la generación de imagen nativa -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
     <style>
         body {
             margin: 0;
-            padding: 20px;
+            padding: 40px 20px;
             display: flex;
+            flex-direction: column; /* Coloca el botón abajo de la tarjeta */
             justify-content: center;
             align-items: center;
             min-height: 100vh;
@@ -191,11 +195,46 @@
             letter-spacing: 4px;
         }
 
+        /* Botón de descarga premium */
+        .download-btn {
+            margin-top: 25px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            border: 2px solid #38b6ff;
+            padding: 12px 28px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 15px -3px rgba(56, 182, 255, 0.2);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .download-btn:hover {
+            background: #38b6ff;
+            color: #0f172a;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -3px rgba(56, 182, 255, 0.4);
+        }
+        .download-btn:active {
+            transform: translateY(0);
+        }
+        .download-btn svg {
+            transition: transform 0.3s ease;
+        }
+        .download-btn:hover svg {
+            transform: translateY(2px);
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- TARJETA VIP (Captura de pantalla a esta caja) -->
+    <!-- TARJETA VIP -->
     <div class="vip-card" id="capture-zone">
         <!-- Esquinas del escáner -->
         <div class="scanner-frame"><div class="bottom-corners"></div></div>
@@ -209,7 +248,7 @@
 
         <!-- Foto del Jefe en Pañales -->
         <div class="agent-photo-container">
-            <img src="https://i0.wp.com/cinemedios.com/wp-content/uploads/2021/07/jefeenpanales2.jpg?fit=1200%2C675&ssl=1" alt="Jefe Eithan" class="agent-photo">
+            <img src="https://i0.wp.com/cinemedios.com/wp-content/uploads/2021/07/jefeenpanales2.jpg?fit=1200%2C675&ssl=1" alt="Jefe Eithan" class="agent-photo" crossorigin="anonymous">
             
             <svg class="spy-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#38b6ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -236,12 +275,21 @@
         <!-- Código QR Dinámico -->
         <div class="qr-zone">
             <div class="qr-container">
-                <!-- La imagen se llenará con el script usando la URL que le digas -->
-                <img id="qr-code-img" src="" alt="QR Code">
+                <img id="qr-code-img" src="" alt="QR Code" crossorigin="anonymous">
             </div>
             <div class="qr-text">ESCANEA O TOCA PARA ABRIR EL EXPEDIENTE</div>
         </div>
     </div>
+
+    <!-- Botón de Descarga -->
+    <button id="btn-download" class="download-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Descargar Pase (PNG)
+    </button>
 
     <script>
         /**
@@ -249,20 +297,87 @@
          * CONFIGURACIÓN DE TU PASE VIP
          * ==========================================
          */
-        
-        // 1. Pon aquí el enlace donde vas a alojar la invitación
-        // Por ejemplo: "https://bautizo-eithan.netlify.app"
         const linkInvitacion = "https://gumbuddy.github.io/invitaciones/index.html"; 
-        
-        // 2. Generar el QR automáticamente con una API gratuita y segura
         const qrImageElement = document.getElementById('qr-code-img');
         
-        // Usamos la API de QR Server para generar un QR en tiempo real
+        // API de QR Server para generar un QR en tiempo real
         const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=0f172a&bgcolor=ffffff&data=${encodeURIComponent(linkInvitacion)}`;
-        
-        // Asignamos la imagen generada
         qrImageElement.src = qrApiUrl;
 
+        /**
+         * Lógica de Descarga como Imagen PNG
+         */
+        document.getElementById('btn-download').addEventListener('click', () => {
+            const btn = document.getElementById('btn-download');
+            
+            // Efecto loading visual
+            btn.innerHTML = `
+                <svg class="playing" style="animation: spin 1s linear infinite;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <line x1="12" y1="2" x2="12" y2="6"></line>
+                    <line x1="12" y1="18" x2="12" y2="22"></line>
+                    <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+                    <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+                    <line x1="2" y1="12" x2="6" y2="12"></line>
+                    <line x1="18" y1="12" x2="22" y2="12"></line>
+                    <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+                    <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+                </svg>
+                Generando Pase...
+            `;
+            btn.style.opacity = '0.7';
+            btn.style.pointerEvents = 'none';
+
+            // Agregamos estilos CSS clave para animación de loading interna
+            const style = document.createElement('style');
+            style.innerHTML = '@keyframes spin { 100% { transform: rotate(360deg); } }';
+            document.head.appendChild(style);
+
+            // Ejecutamos html2canvas sobre el contenedor del pase
+            html2canvas(document.getElementById('capture-zone'), {
+                useCORS: true,
+                allowTaint: true,
+                scale: 2, // Calidad de Render x2 para redes móviles
+                backgroundColor: '#0f172a'
+            }).then(canvas => {
+                // Generamos descarga vía link invisible
+                const link = document.createElement('a');
+                link.download = 'Pase_VIP_Eithan_Daniel.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+
+                // Reestablecemos el botón a su estado normal
+                btn.innerHTML = `
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Descargar Pase (PNG)
+                `;
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            }).catch(err => {
+                console.error("Error capturando imagen del pase: ", err);
+                btn.innerHTML = 'Error al exportar';
+                btn.style.background = '#dc2626';
+                btn.style.borderColor = '#dc2626';
+                
+                setTimeout(() => {
+                    btn.innerHTML = `
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Descargar Pase (PNG)
+                    `;
+                    btn.style.background = '';
+                    btn.style.borderColor = '';
+                    btn.style.opacity = '1';
+                    btn.style.pointerEvents = 'auto';
+                }, 2500);
+            });
+        });
     </script>
 </body>
 </html>
