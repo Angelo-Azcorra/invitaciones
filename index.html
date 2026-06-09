@@ -288,6 +288,13 @@
             height: 24px;
             border-radius: 50%;
         }
+        .gift-suggestion {
+            display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+            background: rgba(56, 182, 255, 0.08); color: var(--c-accent-dark);
+            border: 1px solid rgba(56, 182, 255, 0.18); padding: 0.6rem 1rem; border-radius: 12px;
+            font-weight: 700; font-size: 0.95rem;
+        }
+        .gift-suggestion .gift-size { font-weight: 800; color: var(--c-navy); }
     </style>
 </head>
 <body class="no-scroll">
@@ -445,6 +452,12 @@
         <div class="container reveal">
             <h2 class="font-elegant text-navy" style="font-size: 2.5rem; margin-bottom: 1rem;">Confirmación</h2>
             <p style="color: var(--c-text-light); margin-bottom: 3rem;">Por favor, confírmanos tu asistencia para contemplarte en este día tan especial.</p>
+            <div style="margin-bottom:1.25rem; display:flex; justify-content:center;">
+                <div class="gift-suggestion" role="note" aria-label="Sugerencia de regalo: ropa">
+                    <span>Dato importante:</span>
+                    <span class="gift-size">Ropa — 18-24 meses 👕👖</span>
+                </div>
+            </div>
             <a href="#" id="btn-confirmar" target="_blank" class="btn btn-primary" style="margin-bottom: 4rem; padding: 0 3rem; min-height: 54px;">Confirmar Asistencia</a>
             <div class="divider"></div>
             <div style="margin-top: 3rem;">
